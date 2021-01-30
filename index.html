@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--Header and Menu Section-->
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a class="active" href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Booking Section-->
+    <main class="main-content container">
+        <div class="booking-form">
+            <h3>Booking Flights</h3>
+            <div class="input-group">
+                
+                <label for="">Flying From</label>
+                <input class="inp-style" type="text" name="" placeholder="Dhaka, Bangladesh">
+            </div>
+            <div class="input-group">
+                <label for="">Flying To</label>
+                <input class="inp-style" type="text" name="" placeholder="New York, United States">
+            </div>
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="">Departure</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+                <div class="input-group">
+                    <label for="">Return</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+            </div>
+            <div class="input-group f-class">
+                <div>
+                    <label for="">First Class ($<span id="firstClass-Price">150</span>)</label>
+                    <input id="firstClass-Input" class="inp-style inp-width" type="number" value="0" name="">
+                    
+                </div>
+                <div class="plus-minus-btn">
+                    <button onclick="bookingTicket('firstClass',true)" class="plus-minus-button" >+</button>
+                    <button onclick="bookingTicket('firstClass',false)" class="plus-minus-button">-</button>
+                   
+                </div>
+            </div>
+            
+            <div class="input-group f-class">
+                <div>
+                    <label for="">Economy ($<span id="economyClass-Price">100</span>)</label>
+                    <input id="economyClass-Input" class="inp-style inp-width" type="number" name="" value="0">
+                    
+                </div>
+                <div class="plus-minus-btn">
+                    <button onclick="bookingTicket('economyClass',true)" class="plus-minus-button" >+</button>
+                    <button onclick="bookingTicket('economyClass',false)" class="plus-minus-button">-</button>
+                    
+                </div>
+            </div>
+
+            <div class="calculations">
+                <div class="amount">
+                    <div class="left">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="right">
+                        <p>$<span id="sub-Total">00</span> </p>
+                       
+                    </div>
+                </div>
+
+                <div class="amount">
+                    <div class="left">
+                        <p>Charge 10% VAT</p>
+                    </div>
+                    <div class="right">
+                        <p>$<span id="vat">00</span> </p>
+                        
+                    </div>
+                </div>
+                <hr>
+                <div class="amount">
+                    <div class="left">
+                        <h4>Total</h4>
+                    </div>
+                    <div class="right">
+                        <p>$<span id="total">00</span> </p>
+                        
+                    </div>
+                </div>
+            </div>
+            <button onclick="onclick=alert('Thank you for purchasing ticket.Pls contact agent for further assistance. !')" class="btn-style">Book Now</button>
+         
+        </div>
+
+        <div class="booking-content">
+            <h1>discover <br> around the world</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicingelit. Provident voluptatibus quam fuga laborumalias veniam libero autem quasi maxime ullam vero nama imi dolor, architecto ab facilis eaque deserunt nobise voluptatibus quam</p>
+        </div>
+        <script>
+         
+function bookingTicket(ticket,isIncrease){
+const ticketInput = document.getElementById(ticket + '-Input').value;
+const ticketCount = parseInt(ticketInput);
+let ticketNewCount = ticketCount;
+if (isIncrease == true) {
+ticketNewCount = ticketCount + 1;
+}
+if (isIncrease == false && ticketCount > 0){
+    ticketNewCount = ticketCount - 1;
+}
+document.getElementById(ticket + '-Input').value = ticketNewCount;
+totalTicketPrice();
+} 
+
+//Ticket price calculation
+
+function totalTicketPrice(){
+const firstClassInputNumber = getInputNumber('firstClass');
+const economyClassInputNumber = getInputNumber('economyClass');
+const subTotal = document.getElementById('sub-Total').innerText;
+const subTotalNumber = parseInt(subTotal);
+const subTotalPrice = firstClassInputNumber * 150 + economyClassInputNumber *100 ;
+document.getElementById('sub-Total').innerText = subTotalPrice;
+
+const vat = document.getElementById('vat').innerText;
+const vatNumber = parseInt(vat);
+
+const vatPrice = Math.round(.1 * subTotalPrice)
+document.getElementById('vat').innerText = vatPrice;
+
+const total = document.getElementById('total').innerText;
+const totalNumber = parseInt(total);
+
+const totalPrice = subTotalPrice + vatPrice;
+document.getElementById('total').innerText = totalPrice;
+}
+
+function getInputNumber(ticket){
+const ticketInput = document.getElementById(ticket + '-Input').value;
+const ticketInputNumber = parseInt(ticketInput);
+return ticketInputNumber;
+}
+</script>
+</section>
+
+<!--Thank You-->
+</body>
+</html>
